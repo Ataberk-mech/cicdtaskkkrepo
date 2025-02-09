@@ -5,7 +5,6 @@ on:
     push:
         branches:
             - main
-bin/phpunit
 env:
     fail-fast: true
     PHPUNIT_FLAGS: "-v"
