@@ -8,7 +8,11 @@ on:
 env:
     fail-fast: true
     PHPUNIT_FLAGS: "-v"
+<<<<<<< HEAD:.github/workflows/tests.yaml
     SYMFONY_PHPUNIT_DIR: "bin/phpunit"
+=======
+    SYMFONY_PHPUNIT_DIR: "cicdtaskkkrepo/bin/phpunit"
+>>>>>>> 72568d3 (gamze_yeni):.github/workflows/test.yaml
     SYMFONY_REQUIRE: ">=4.4"
     SYMFONY_DEPRECATIONS_HELPER: 40
 
@@ -50,7 +54,11 @@ jobs:
             - name: "Cache composer"
               uses: actions/cache@v2
               with:
+<<<<<<< HEAD:.github/workflows/tests.yaml
                   path: ${{ env.SYMFONY_PHPUNIT_DIR }}
+=======
+                  path: ${{ env.COMPOSER_CACHE_DIR }}
+>>>>>>> 72568d3 (gamze_yeni):.github/workflows/test.yaml
                   key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
                   restore-keys: ${{ runner.os }}-${{ matrix.php-version }}-composer-
 
