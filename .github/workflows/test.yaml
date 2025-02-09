@@ -8,11 +8,8 @@ on:
 env:
     fail-fast: true
     PHPUNIT_FLAGS: "-v"
-<<<<<<< HEAD:.github/workflows/tests.yaml
     SYMFONY_PHPUNIT_DIR: "bin/phpunit"
-=======
     SYMFONY_PHPUNIT_DIR: "cicdtaskkkrepo/bin/phpunit"
->>>>>>> 72568d3 (gamze_yeni):.github/workflows/test.yaml
     SYMFONY_REQUIRE: ">=4.4"
     SYMFONY_DEPRECATIONS_HELPER: 40
 
