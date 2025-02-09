@@ -1,140 +1,76 @@
 name: "Tests"
 
- variables. Here are steps to help resolve theon:
+on:
     pull_request:
     push:
         branches:
- issue:
-
-1. **Verify Environment Variables**:
-              - main
+            - main
 
 env:
     fail-fast: true
-    PHP Ensure `SYMFONY_PHPUNIT_DIR` is correctly set.
-
-2. **Confirm PHPUnit Installation**:
-   Verify that PHPUnitUNIT_FLAGS: "-v"
-    SYMFONY_PHPUNIT_DIR: "cicdt is installed in the correct directory and isaskkkrepo/bin/phpunit"
+    PHPUNIT_FLAGS: "-v"
+    SYMFONY_PHPUNIT_DIR: "cicdtaskkkrepo/bin/phpunit"
     SYMFONY_REQUIRE: ">=4.4"
     SYMFONY_DEPRECATIONS_HELPER: 40
 
 jobs:
     test:
         name: "${{ matrix.operating-system }} / PHP ${{ matrix.php-version }}"
-        runs-on: $ accessible.
-
-Here is an updated `tests.yaml` workflow with{{ matrix.operating-system }}
-        continue-on-error: false
-
-        strategy:
-            matrix:
-                operating-system: ['ubuntu-latest']
- additional debug steps:
-
-```yaml
-name: "Tests"
-
-on:
-    pull_request:
-    push:
-        branches:
-                php-version: ['8.0', '8.1']
-                include:
-                    - operating-system: 'mac            - main
-
-env:
-    fail-fast: true
-    PHPos-latest'
-                      php-version: '8.0'
-                    - operating-system: 'windows-latest'
-                      php-version: '8.0'
-
-       UNIT_FLAGS: "-v"
-    SYMFONY_PHPUNIT_DIR: "cicdtaskkkrepo/bin/phpunit"
-    SYMFONY_REQUIRE: ">=4. steps:
-            - name: "Checkout code"
-              uses: actions/checkout@v3
-
-            - name: "Install PHP with extensions"
-              uses4"
-    SYMFONY_DEPRECATIONS_HELPER: 40
-
-jobs:
-    test:
-        name: "${{ matrix.operating-system }} /: shivammathur/setup-php@2.7.0
-              with:
-                  coverage: "none"
-                  extensions PHP ${{ matrix.php-version }}"
         runs-on: ${{ matrix.operating-system }}
         continue-on-error: false
 
         strategy:
             matrix:
-: "intl, mbstring, pdo_sqlite"
-                  php-version: ${{ matrix.php-version }}
-                  tools:                operating-system: ['ubuntu-latest']
-                php-version composer:v2
-
-            - name: "Add PHPUnit matcher"
-              run: echo "::add-matcher::${: ['8.0', '8.1']
+                operating-system: ['ubuntu-latest']
+                php-version: ['8.0', '8.1']
                 include:
-                    - operating-system: 'mac{ runner.tool_cache }}/phpunit.json"
-
-            - name: "Set composer cache directory"
-              idos-latest'
-                      php-version: '8: composer-cache
-              run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_ENV
-
-           .0'
-                    - operating-system: 'windows-l - name: "Cache composer"
-              usesatest'
+                    - operating-system: 'macos-latest'
+                      php-version: '8.0'
+                    - operating-system: 'windows-latest'
                       php-version: '8.0'
 
-       : actions/cache@v2.1.2
-              with:
-                  path steps:
+        steps:
             - name: "Checkout code"
-             : ${{ env.COMPOSER_CACHE_DIR }}
-                  key uses: actions/checkout@v3
+              uses: actions/checkout@v3
 
             - name: "Install PHP with extensions"
-              uses: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
-                  restore: shivammathur/setup-php@2.7.0
+              uses: shivammathur/setup-php@2.7.0
               with:
--keys: ${{ runner.os }}-${{ matrix.php-version }}                  coverage: "none"
-                  extensions:-composer-
+                  coverage: "none"
+                  extensions: "intl, mbstring, pdo_sqlite"
+                  php-version: ${{ matrix.php-version }}
+                  tools: composer:v2
+
+            - name: "Add PHPUnit matcher"
+              run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+            - name: "Set composer cache directory"
+              id: composer-cache
+              run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_ENV
+
+            - name: "Cache composer"
+              uses: actions/cache@v2.1.2
+              with:
+                  path: ${{ env.COMPOSER_CACHE_DIR }}
+                  key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
+                  restore-keys: ${{ runner.os }}-${{ matrix.php-version }}-composer-
 
             - name: "Require symfony/flex"
-              run: composer global require --no "intl, mbstring, pdo_sqlite"
-                  php-version: ${{ matrix.php-version }}
-                  tools-progress --no-scripts --no-plugins symfony/flex
+              run: composer global require --no-progress --no-scripts --no-plugins symfony/flex
 
             - run: composer update
 
-            - name: composer:v2
-
-            - name: "Add PHPUnit matcher"
-              run: echo "::add-matcher::${: "Install PHPUnit"
+            - name: "Install PHPUnit"
               run: vendor/bin/simple-phpunit install
 
             - name: "PHPUnit version"
-              run: vendor/bin/simple-{ runner.tool_cache }}/phpunit.json"
+              run: vendor/bin/simple-phpunit --version
 
-            -phpunit --version
-
-            - name: "Check SYMFONY name: "Set composer cache directory"
-              id: composer-cache
-              run: echo "dir=$(composer_PHPUNIT_DIR"
+            - name: "Check SYMFONY_PHPUNIT_DIR"
               run: echo $SYMFONY_PHPUNIT_DIR
 
             - name: "Verify PHPUnit installation"
- config cache-files-dir)" >> $GITHUB_ENV
-
-            - name: "Cache composer"
-              uses              run: ls -al $SYMFONY_PHPUNIT_DIR
+              run: ls -al $SYMFONY_PHPUNIT_DIR
 
             - name: "Run tests"
-              run: vendor: actions/cache@v2.1.2
-              with:
-                  path/bin/simple-phpunit ${{ env.PHPUNIT_FLAGS }}
+              run: vendor/bin/simple-phpunit ${{ env.PHPUNIT_FLAGS }}
