@@ -50,7 +50,7 @@ jobs:
             - name: "Cache composer"
               uses: actions/cache@v4
               with:
-                  path: ${{ env.COMPOSER_CACHE_DIR }}
+                  path: ${{ env.SYMFONY_PHPUNIT_DIR }}
                   key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
                   restore-keys: ${{ runner.os }}-${{ matrix.php-version }}-composer-
 
