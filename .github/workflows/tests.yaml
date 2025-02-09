@@ -48,7 +48,7 @@ jobs:
               run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_ENV
 
             - name: "Cache composer"
-              uses: actions/cache@v4.0
+              uses: actions/cache@v4
               with:
                   path: ${{ env.COMPOSER_CACHE_DIR }}
                   key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
