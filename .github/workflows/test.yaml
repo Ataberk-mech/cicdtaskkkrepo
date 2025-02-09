@@ -51,7 +51,6 @@ jobs:
               uses: actions/cache@v2
               with:
                   path: ${{ env.SYMFONY_PHPUNIT_DIR }}
-                  path: ${{ env.COMPOSER_CACHE_DIR }}
                   key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
                   restore-keys: ${{ runner.os }}-${{ matrix.php-version }}-composer-
 
