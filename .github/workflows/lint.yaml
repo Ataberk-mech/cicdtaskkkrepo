@@ -15,7 +15,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: "Checkout code"
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3  # Updated to the latest version
 
             - name: PHP-CS-Fixer
               uses: docker://oskarstark/php-cs-fixer-ga
@@ -31,7 +31,7 @@ jobs:
 
         steps:
             - name: "Checkout code"
-              uses: actions/checkout@v2.3.3
+              uses: actions/checkout@v3  # Updated to the latest version
 
             - name: "Install PHP with extensions"
               uses: shivammathur/setup-php@2.7.0
@@ -43,12 +43,12 @@ jobs:
 
             - name: "Set composer cache directory"
               id: composer-cache
-              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+              run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_ENV  # Use Environment Files
 
             - name: "Cache composer"
               uses: actions/cache@v2.1.2
               with:
-                  path: ${{ steps.composer-cache.outputs.dir }}
+                  path: ${{ env.dir }}
                   key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}
                   restore-keys: ${{ runner.os }}-${{ matrix.php-version }}-composer-
 
